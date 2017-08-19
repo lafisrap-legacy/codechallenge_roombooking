@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title><%= config.title %></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/startbootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom fonts for this theme -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,600,500,700,800,900' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="/startbootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/startbootstrap/vendor/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="/startbootstrap/vendor/owl-carousel/owl.theme.css" rel="stylesheet" type="text/css">
+    <link href="/startbootstrap/vendor/owl-carousel/owl.transitions.css" rel="stylesheet" type="text/css">
+    <link href="/startbootstrap/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="/startbootstrap/vendor/animate.css/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="/imageshop/css/frames.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this theme -->
+    <!-- Uncomment the color scheme you want to use! Red is chosen by default! -->
+    <link href="/startbootstrap/css/vitality.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="<%= bundle %>"></script>
+    <%_ if (!debug && config.trackingID) { _%>
+    <script>
+      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+      ga('create','<%= config.trackingID %>','auto');ga('send','pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <%_ } _%>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/startbootstrap/vendor/jquery/jquery.min.js"></script>
+    <script src="/startbootstrap/vendor/tether/tether.min.js"></script>
+    <script src="/startbootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/startbootstrap/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="/startbootstrap/vendor/owl-carousel/owl.carousel.js"></script>
+    <script src="/startbootstrap/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="/startbootstrap/vendor/vide/jquery.vide.min.js"></script>
+    <script src="/startbootstrap/vendor/mixitup/mixitup.min.js"></script>
+    <script src="/startbootstrap/vendor/wowjs/wow.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="/startbootstrap/js/contact_me.js"></script>
+    <script src="/startbootstrap/js/jqBootstrapValidation.js"></script>
+
+    <!-- Custom scripts for this theme -->
+    <script src="/startbootstrap/js/vitality.js"></script>
+    <script src="/startbootstrap/js/vitality-mixitup.js"></script>  </body>
+</html>

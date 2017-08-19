@@ -1,0 +1,12 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "no-console": 0,
+    "no-unused-expressions": 0,
+    "padded-blocks": 0,
+    "comma-dangle": [2, "never"],
+    "no-underscore-dangle": 0
+  }
+}

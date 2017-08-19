@@ -1,0 +1,93 @@
+
+- name: "Digital"
+  formats:
+    - name: "Web only (1600 x 1000px)"
+      description: >
+        "Some words to the format"
+      price: 25.00
+    - name: "Web & Print (4000 x 2500px)"
+      description: >
+        Some words to the format
+      price: 35.00
+    - name: "Print Cover (< 1 000 copies)"
+      description: >
+        "Some words to the format"
+      price: 65.00
+    - name: "Print Cover (< 10 000 copies)"
+      description: >
+        "Some words to the format"
+      price: 85.00
+    - name: "Print Cover (> 10 000 copies)"
+      description: >
+        Some words to the format
+      price: 105.00
+  maxNumber: 1
+  canvas: golden_frame
+
+- name: "Standard Photo Paper"
+  formats:
+    - name: "21 x 30cm"
+      description: >
+        Some words to the format
+      price: 65.00
+    - name: "35 x 50cm"
+      description: >
+        Some words to the format
+      price: 85.00
+    - name: "40 x 60cm"
+      description: >
+        Some words to the format
+      price: 105.00
+    - name: "50 x 70cm"
+      description: >
+        Some words to the format
+      price: 125.00
+    - name: "70 x 100cm"
+      description: >
+        Some words to the format
+      price: 195.00
+  maxNumber: 100
+  canvas: macbook_2015
+
+- name: "Premium Photo Paper"
+  formats:
+    - name: "21 x 30cm"
+      description: >
+        Some words to the format
+      price: 75.00
+    - name: "35 x 50cm"
+      description: >
+        Some words to the format
+      price: 95.00
+    - name: "40 x 60cm"
+      description: >
+        Some words to the format
+      price: 115.00
+    - name: "50 x 70cm"
+      description: >
+        Some words to the format
+      price: 135.00
+    - name: "70 x 100cm"
+      description: >
+        Some words to the format
+      price: 205.00
+  maxNumber: 100
+  canvas: samsung_tv
+
+- name: "Canvas"
+  formats:
+    - name: "40 x 60cm"
+      description: >
+        Some words to the format
+      price: 75.00
+    - name: "50 x 70cm"
+      description: >
+        Some words to the format
+      price: 95.00
+    - name: "70 x 100cm"
+      description: >
+        Some words to the format
+      price: 115.00
+  maxNumber: 10
+  canvas: samsung_tv
+

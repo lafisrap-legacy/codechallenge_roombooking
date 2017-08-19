@@ -1,0 +1,25 @@
+frames:
+  - Digital:
+    - sizes:
+      - 4000: 4000 x 2500px
+      - 1600: 1600 x 1000px
+    - formats:
+      - Web: Web only
+      - WebPrint: Web & Print
+      - PrintCover1: Print Cover (< 1 000 copies)
+      - PrintCover2: Print Cover (< 10 000 copies)
+      - PrintCover3: Print Cover (> 10 000 copies)
+    - prices:
+        - currency: €
+        - base: 25,00
+        - 4000: +10
+        - Web: x0.5
+        - PrintCover1: x1.5
+        - PrintCover2: x2
+        - PrintCover3: 100
+    - canvas: macbook
+    - backgroundImage: bg-2.jpg
+
+  - Wooden Frame:
+    - sizes: 
+

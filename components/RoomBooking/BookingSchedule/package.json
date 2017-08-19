@@ -1,0 +1,6 @@
+{
+  "name": "BookingSchedule",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BookingSchedule.js"
+}
