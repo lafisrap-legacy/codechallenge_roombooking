@@ -45,19 +45,21 @@ class RoomBooking extends Component {
   }
 
   render() {
-    let {date} = this.props;
-
-    if( !date ) date = "today";
+    let {date} = this.state;
 
     return (
       <section className={cx('room-booking-section', s.section)}>
         <div className="container text-center fadeIn">
           <div className={cx('row', s.row)}>
-            <DatePicker date={date} />
-            <RoomFilter setFilteredList={this.setFilteredList} />
+            <div className={cx('col col-4')}>
+              <DatePicker date={date} />
+            </div>
+            <div className={cx('col col-8')}>
+              <RoomFilter setFilteredList={this.setFilteredList} />
+            </div>
           </div>
           <div className={cx('row', s.row)}>
-            <RoomList date={date} />
+            <RoomList />
           </div>
         </div>
       </section>
@@ -65,4 +67,8 @@ class RoomBooking extends Component {
   }
 }
 
-export default RoomBooking;
+function mapStateToProps({ rooms }) {
+  return { date: rooms.date };
+}
+
+export default connect(mapStateToProps)(RoomBooking);

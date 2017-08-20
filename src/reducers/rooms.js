@@ -16,6 +16,7 @@ const rooms = (state = initialState, action) => {
   switch (action.type) {
 
     case FETCH_ROOMS: {
+      console.log(1, data);
       const rooms = data.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase());
 
       return { ...state, rooms };

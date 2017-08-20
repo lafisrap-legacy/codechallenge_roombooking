@@ -31,7 +31,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className={cx(s.wrapper)}>
-        <RoomBooking date="today" i="1" />
+        <RoomBooking />
       </div>
     );
   }
