@@ -11,28 +11,28 @@
 /* eslint comma-dangle: [2, "never"] */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import cx from 'classnames';
 
-import { urlize } from '../../../src/utils';
-import s from './PortfolioFilter.css';
+import s from './BookingSchedule.css';
 
-class PortfolioFilter extends React.Component {
+const TIME_START = 7; // h
+const TIME_END = 19; // h
+const TIME_STEPS = 4; // x per hour
+const FREE = 0;
+const BOOKED = 1;
+const timespanRe = /([\d]{2}):([\d]{2})[^\d]+([\d]{2}):([\d]{2})/;
+
+class BookingSchedule extends React.Component {
   static propTypes = {
-    portfolio: PropTypes.shape({
-      title: PropTypes.string,
-      subtitle: PropTypes.string,
-      all: PropTypes.string,
-      filters: PropTypes.array,
-      elements: PropTypes.array
-    })
+    avail: PropTypes.arrayOf(PropTypes.string)
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      allTopic: {}
+      schedule: this.getSchedule(props.avail),
+      scale: this.getScale()
     };
   }
 
@@ -42,78 +42,63 @@ class PortfolioFilter extends React.Component {
   componentWillUnmount() {
   }
 
-  render() {
-    const filters = (this.props.portfolio && this.props.portfolio.filters) || null;
+  getSchedule(avail) {
+    let schedule = new Array((TIME_END - TIME_START) * TIME_STEPS).fill(FREE);
 
-    if (!filters) return <div className="spinner" />;
+    // Retrieve time spans from avail data
+    const timespans = avail.map(timespan => {
+      const ts = timespan.match(timespanRe);
 
-      // Prepare filter tabs
-    const tabs = filters.map((filter, i) => (
-      <li className="nav-item" key={filter.id}>
-        <a
-          className={`nav-link${!i ? ' active' : ''}`}
-          data-toggle="tab"
-          href={`#${filter.id}`}
-          role="tab" aria-controls={filter.id}
-          aria-expanded={!i ? 'true' : 'false'}
-          onClick={() => this.state.allTopic[filter.id].click()}
-        >
-          {filter.name}
-        </a>
-      </li>
-    ));
-
-    // Prepare filter buttons
-    const buttons = filters.map((filter, i) => {
-      // Prepare one topic
-      const topics = filter.topics.map((topic, j) => (
-        <button
-          type="button"
-          className="control btn btn-secondary btn-sm mx-2 mb-4"
-          data-filter={`.${urlize(topic)}`}
-          key={urlize(topic)}
-          ref={(t) => {
-            if (!j) this.state.allTopic[filter.id] = t;
-            return null;
-          }}
-        >
-          {!j ? this.props.portfolio.all : topic}
-        </button>
-      ));
-
-      // Collect topics
-      return (
-        <div
-          role="tabpanel"
-          className={cx('tab-pane', `fade${!i ? ' active show' : ''}`, s.tabPane)}
-          id={filter.id}
-          key={filter.id}
-          aria-labelledby={`${filter.id}_tab`}
-          aria-expanded={!i ? 'true' : 'false'}
-        >
-          <div className="controls mt-3">
-            {topics}
-          </div>
-        </div>
-      );
+      return [(parseInt(ts[1]) - TIME_START) * TIME_STEPS + parseInt(ts[2]) / 60 * TIME_STEPS,
+              (parseInt(ts[3]) - TIME_START) * TIME_STEPS + parseInt(ts[4]) / 60 * TIME_STEPS];
     });
 
-    // Collect tabs and buttons
+    // Read them into a booking array
+    timespans.map(timespan => {
+      for( let i=timespan[0] ; i<timespan[1] ; i++ ) schedule[i] = BOOKED;
+    });
+
+    return schedule;
+  }
+
+  getScale() {
+    let scale = [];
+
+    for( let hour=TIME_START; hour<TIME_END ; hour++ ) {
+      for( let i=0, minutes=60/TIME_STEPS ; i<TIME_STEPS ; i++ ) {
+        scale.push({
+          hour,
+          minutes: minutes * i
+        })
+      }
+    }
+
+    return scale;
+  }
+
+  render() {
+    const {schedule, scale} = this.state;
+
     return (
-      <div>
-        <ul className="nav nav-tabs" id="portfolio-group" role="tablist">
-          { tabs }
-        </ul>
-        <div className="tab-content" id="myTabContent">
-          { buttons }
-        </div>
+      <div className={cx(s.wrapper)} >
+        <table className={cx(s.table)}>
+          <tbody>
+            <tr>
+              {this.state.schedule.map((booked, i) => 
+                <td
+                  key={`booked${i}`}
+                  className={cx(s.period, booked? s.booked : s.free, i%TIME_STEPS? s.fraction : s.full)}
+                >
+                  {i%TIME_STEPS? scale[i].minutes : scale[i].hour}
+                </td>
+              )}
+            </tr>
+          </tbody>
+        </table>
+
       </div>
-    );
+    )
   }
 }
 
-function mapStateToProps({ portfolio }) {
-  return { portfolio };
-}
-
-export default connect(mapStateToProps)(PortfolioFilter);
+export default BookingSchedule;

@@ -46,7 +46,7 @@ class RoomList extends React.Component {
     return (
       <div className={cx('room-list', 'clearfix', s.roomlist)}>
         <div id="roombooking__roomlist" role="tablist" aria-multiselectable="true">
-          {this.props.rooms.map((room, i) => <RoomInfo key={`${room.name}_${room.size}`} index={i} info={room} />)}
+          {this.props.rooms.map((room, i) => <RoomInfo key={`${room.name}_${room.size}`} index={i} room={room} />)}
         </div>
       </div>
     );

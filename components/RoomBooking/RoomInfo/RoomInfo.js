@@ -14,13 +14,15 @@ import React, { PropTypes } from 'react';
 import { isEmpty } from 'lodash';
 import cx from 'classnames';
 
+import BookingSchedule from '../BookingSchedule';
+
 import s from './RoomInfo.css';
 import { API_BASE_URL } from '../../../src/actions';
 
 class RoomInfo extends React.Component {
 
   static propTypes = {
-    info: PropTypes.shape({
+    room: PropTypes.shape({
       avail: PropTypes.arrayOf(PropTypes.string),
       capacity: PropTypes.number,
       equipment: PropTypes.arrayOf(PropTypes.string),
@@ -39,9 +41,9 @@ class RoomInfo extends React.Component {
   }
 
   render() {
-    const { index, info } = this.props;
+    const { index, room } = this.props;
 
-    if (isEmpty(info)) return <div className="spinner" />;
+    if (isEmpty(room)) return <div className="spinner" />;
 
     return (
       <div className="card">
@@ -57,15 +59,15 @@ class RoomInfo extends React.Component {
             >
               <div className="row">
                 <div className="col-lg-4 col-xs-12">
-                  <span className={cx(s.headerItem, s.roomName)}>{info.name}</span>
+                  <span className={cx(s.headerItem, s.roomName)}>{room.name}</span>
                   <br />
                   <span className={cx(s.headerItem, s.roomCapacity)}>
-                    Capacity: {info.capacity}
+                    Capacity: {room.capacity}
                   </span>
-                  <span className={cx(s.headerItem, s.roomSize)}>{info.size}</span>
+                  <span className={cx(s.headerItem, s.roomSize)}>{room.size}</span>
                 </div>
                 <div className="col-lg-8 col-xs-12">
-                  <span>Time Schedule</span>
+                  <BookingSchedule avail={room.avail} />
                 </div>
               </div>
             </a>
@@ -77,13 +79,13 @@ class RoomInfo extends React.Component {
             <div className="row">
               <div className="col-lg-9 col-xs-12">
                 <div className={cx(s.headerItem, s.roomName)}>Location</div>
-                <div className={cx(s.headerItem)}>{info.location}</div>
+                <div className={cx(s.headerItem)}>{room.location}</div>
                 <div className={cx(s.headerItem, s.roomName)}>Equipment</div>
-                <div className={cx(s.headerItem)}>{info.equipment.join(', ')}</div>
+                <div className={cx(s.headerItem)}>{room.equipment.join(', ')}</div>
                 <button className={cx('btn', 'btn-success', 'float-left', s.headerItem, s.roomButton)}>Book!</button>
               </div>
               <div className="col-lg-3 col-xs-12">
-                {info.images.map(image =>
+                {room.images.map(image =>
                   <img
                     key={image}
                     src={`${API_BASE_URL}/${image}`}
