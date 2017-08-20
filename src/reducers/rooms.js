@@ -9,11 +9,14 @@ const initialState = {
   rooms: [],
 };
 
-export default (state = initialState, action) => {
+const rooms = (state = initialState, action) => {
+
+  const data = (action.payload && action.payload.data) || null;
+
   switch (action.type) {
 
     case FETCH_ROOMS: {
-      const rooms = action.payload.data.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase());
+      const rooms = data.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase());
 
       return { ...state, rooms };
     }
@@ -22,3 +25,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default rooms;
