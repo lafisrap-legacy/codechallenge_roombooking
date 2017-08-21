@@ -18,12 +18,7 @@ import s from './BookingForm.css';
 
 const BookingForm = () =>
   <div className={cx(s.wrapper)} >
-    Book Room on {this.props.rooms.date}
+    Book Room
   </div>;
 
-
-function mapStateToProps({ rooms }) {
-  return { rooms };
-}
-
-export default connect(mapStateToProps)(BookingForm);
+export default BookingForm;
