@@ -37,7 +37,7 @@ const config = {
     '!!style-loader!css-loader!react-mdl/extra/material.min.css',
     'react-mdl/extra/material.min.js',
     /* The main entry point of your JavaScript application */
-    '../public/imageshop/js/yaml.js',
+    '!!style-loader!css-loader!react-day-picker/lib/style.css',
     './main.js',
   ],
 

@@ -30,7 +30,8 @@ class RoomList extends React.Component {
       location: PropTypes.string,
       name: PropTypes.string,
       size: PropTypes.string
-    })).isRequired
+    })).isRequired,
+    date: PropTypes.string
   };
 
   componentDidMount() {
@@ -40,13 +41,13 @@ class RoomList extends React.Component {
   }
 
   render() {
-    const rooms = this.props.rooms;
+    const { rooms, date } = this.props;
 
     if (!rooms.length) return <div className="spinner" />;
     return (
       <div className={cx('room-list', 'clearfix', s.roomlist)}>
         <div id="roombooking__roomlist" role="tablist" aria-multiselectable="true">
-          {this.props.rooms.map((room, i) => <RoomInfo key={`${room.name}_${room.size}`} index={i} room={room} />)}
+          {this.props.rooms.map((room, i) => <RoomInfo key={`${room.name}_${room.size}`} index={i} room={room} date={date} />)}
         </div>
       </div>
     );

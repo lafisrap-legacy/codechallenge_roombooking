@@ -1,4 +1,5 @@
-import { FETCH_ROOMS } from '../actions';
+import moment from 'moment';
+import { FETCH_ROOMS, SET_DATE } from '../actions';
 
 //----------------------------------------------------
 // Centralized application state
@@ -7,19 +8,26 @@ const initialState = {
   //----------------------------------------------------
   // Rooms, with info of a specific day
   rooms: [],
+  //----------------------------------------------------
+  // Currently selected date
+  date: moment().unix(),
 };
 
-const rooms = (state = initialState, action) => {
-
+const Rooms = (state = initialState, action) => {
   const data = (action.payload && action.payload.data) || null;
 
   switch (action.type) {
 
     case FETCH_ROOMS: {
-      console.log(1, data);
       const rooms = data.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase());
 
       return { ...state, rooms };
+    }
+
+    case SET_DATE: {
+      const date = action.payload;
+
+      return { ...state, date };
     }
 
     default:
@@ -27,4 +35,4 @@ const rooms = (state = initialState, action) => {
   }
 };
 
-export default rooms;
+export default Rooms;

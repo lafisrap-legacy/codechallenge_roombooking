@@ -10,36 +10,14 @@
 
 /* eslint comma-dangle: [2, "never"] */
 
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import cx from 'classnames';
 
 import s from './RoomFilter.css';
 
-class RoomFilter extends React.Component {
-  static propTypes = {
-    //setFilteredList: PropTypes.function,
-    //rooms: PropTypes.object
-  };
+const RoomFilter = () =>
+  <div className={cx(s.wrapper)}>
+      Filter
+  </div>;
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  render() {
-    // Collect tabs and buttons
-    return (
-      <div>
-        Filter
-      </div>
-    );
-  }
-}
-
-function mapStateToProps({ rooms }) {
-  return { rooms };
-}
-
-export default connect(mapStateToProps)(RoomFilter);
+export default RoomFilter;

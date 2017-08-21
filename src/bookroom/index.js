@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cx from 'classnames';
 
-import RoomBooking from '../../components/RoomBooking';
+import BookingForm from '../../components/RoomBooking/BookingForm';
 import { fetchRooms } from '../actions';
 
 import s from './styles.css';
@@ -31,7 +31,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className={cx(s.wrapper)}>
-        <RoomBooking />
+        <BookingForm />
       </div>
     );
   }

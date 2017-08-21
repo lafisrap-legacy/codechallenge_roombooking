@@ -9,8 +9,8 @@
  */
 
 module.exports = {
-  title: 'Homey Image Store',        // Your website title
-  url: 'http://store.homey.berlin',          // Your website URL
-  project: 'homey-image-store',      // Firebase project. See README.md -> How to Deploy
-  trackingID: 'UA-XXXXX-Y',                 // Google Analytics Site's ID
+  title: '1aim RoomBooking',        // Your website title
+  url: 'http://example.com',          // Your website URL
+  // project: 'homey-image-store',      // Firebase project. See README.md -> How to Deploy
+  // trackingID: 'UA-XXXXX-Y',                 // Google Analytics Site's ID
 };

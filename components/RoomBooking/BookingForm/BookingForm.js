@@ -10,110 +10,20 @@
 
 /* eslint comma-dangle: [2, "never"] */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
-import { urlize } from '../../../src/utils';
-import s from './PortfolioFilter.css';
+import s from './BookingForm.css';
 
-class PortfolioFilter extends React.Component {
-  static propTypes = {
-    portfolio: PropTypes.shape({
-      title: PropTypes.string,
-      subtitle: PropTypes.string,
-      all: PropTypes.string,
-      filters: PropTypes.array,
-      elements: PropTypes.array
-    })
-  };
+const BookingForm = () =>
+  <div className={cx(s.wrapper)} >
+    Book Room on {this.props.rooms.date}
+  </div>;
 
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      allTopic: {}
-    };
-  }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  render() {
-    const filters = (this.props.portfolio && this.props.portfolio.filters) || null;
-
-    if (!filters) return <div className="spinner" />;
-
-      // Prepare filter tabs
-    const tabs = filters.map((filter, i) => (
-      <li className="nav-item" key={filter.id}>
-        <a
-          className={`nav-link${!i ? ' active' : ''}`}
-          data-toggle="tab"
-          href={`#${filter.id}`}
-          role="tab" aria-controls={filter.id}
-          aria-expanded={!i ? 'true' : 'false'}
-          onClick={() => this.state.allTopic[filter.id].click()}
-        >
-          {filter.name}
-        </a>
-      </li>
-    ));
-
-    // Prepare filter buttons
-    const buttons = filters.map((filter, i) => {
-      // Prepare one topic
-      const topics = filter.topics.map((topic, j) => (
-        <button
-          type="button"
-          className="control btn btn-secondary btn-sm mx-2 mb-4"
-          data-filter={`.${urlize(topic)}`}
-          key={urlize(topic)}
-          ref={(t) => {
-            if (!j) this.state.allTopic[filter.id] = t;
-            return null;
-          }}
-        >
-          {!j ? this.props.portfolio.all : topic}
-        </button>
-      ));
-
-      // Collect topics
-      return (
-        <div
-          role="tabpanel"
-          className={cx('tab-pane', `fade${!i ? ' active show' : ''}`, s.tabPane)}
-          id={filter.id}
-          key={filter.id}
-          aria-labelledby={`${filter.id}_tab`}
-          aria-expanded={!i ? 'true' : 'false'}
-        >
-          <div className="controls mt-3">
-            {topics}
-          </div>
-        </div>
-      );
-    });
-
-    // Collect tabs and buttons
-    return (
-      <div>
-        <ul className="nav nav-tabs" id="portfolio-group" role="tablist">
-          { tabs }
-        </ul>
-        <div className="tab-content" id="myTabContent">
-          { buttons }
-        </div>
-      </div>
-    );
-  }
+function mapStateToProps({ rooms }) {
+  return { rooms };
 }
 
-function mapStateToProps({ portfolio }) {
-  return { portfolio };
-}
-
-export default connect(mapStateToProps)(PortfolioFilter);
+export default connect(mapStateToProps)(BookingForm);

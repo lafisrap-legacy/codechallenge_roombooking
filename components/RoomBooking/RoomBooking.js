@@ -10,56 +10,45 @@
 
 /* eslint comma-dangle: [2, "never"] */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { isEmpty } from 'lodash';
 
 import s from './RoomBooking.css';
-import DatePicker from '../DatePicker';
+import DateModifier from '../DateModifier';
 import RoomFilter from './RoomFilter';
 import RoomList from './RoomList';
 
 class RoomBooking extends Component {
 
-  static propTypes = {
-    date: PropTypes.string
-  };
-
   constructor(props) {
     super(props);
 
     this.state = {
-      filteredList: null
+      date: 'today'
     };
   }
 
-  componentDidUpdate() {
-  }
-
-  componentWillUnmount() {
-  }
-
   setFilteredList(filteredList) {
-    this.setState({filteredList});
+    this.setState({ filteredList });
   }
 
   render() {
-    let {date} = this.state;
+    const { date } = this.state;
 
     return (
       <section className={cx('room-booking-section', s.section)}>
         <div className="container text-center fadeIn">
           <div className={cx('row', s.row)}>
-            <div className={cx('col col-4')}>
-              <DatePicker date={date} />
+            <div className={cx('col col-5')}>
+              <DateModifier date={date} />
             </div>
-            <div className={cx('col col-8')}>
+            <div className={cx('col col-7')}>
               <RoomFilter setFilteredList={this.setFilteredList} />
             </div>
           </div>
           <div className={cx('row', s.row)}>
-            <RoomList />
+            <RoomList date={date} />
           </div>
         </div>
       </section>

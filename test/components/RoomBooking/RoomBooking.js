@@ -1,6 +1,6 @@
 
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import rewire from 'rewire';
 // sinon
@@ -16,7 +16,7 @@ const RoomBooking = RoomBookingWrapper.__get__('RoomBooking');
 process.env.NODE_ENV = 'test';
 
 const testData = {
-  date: "today"
+  date: 'today'
 };
 
 describe('RoomBooking, ', () => {

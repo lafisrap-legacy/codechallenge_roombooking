@@ -27,77 +27,77 @@ class BookingSchedule extends React.Component {
     avail: PropTypes.arrayOf(PropTypes.string)
   };
 
-  constructor(props) {
-    super(props);
+  static getScale() {
+    const scale = [];
 
-    this.state = {
-      schedule: this.getSchedule(props.avail),
-      scale: this.getScale()
-    };
-  }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  getSchedule(avail) {
-    let schedule = new Array((TIME_END - TIME_START) * TIME_STEPS).fill(FREE);
-
-    // Retrieve time spans from avail data
-    const timespans = avail.map(timespan => {
-      const ts = timespan.match(timespanRe);
-
-      return [(parseInt(ts[1]) - TIME_START) * TIME_STEPS + parseInt(ts[2]) / 60 * TIME_STEPS,
-              (parseInt(ts[3]) - TIME_START) * TIME_STEPS + parseInt(ts[4]) / 60 * TIME_STEPS];
-    });
-
-    // Read them into a booking array
-    timespans.map(timespan => {
-      for( let i=timespan[0] ; i<timespan[1] ; i++ ) schedule[i] = BOOKED;
-    });
-
-    return schedule;
-  }
-
-  getScale() {
-    let scale = [];
-
-    for( let hour=TIME_START; hour<TIME_END ; hour++ ) {
-      for( let i=0, minutes=60/TIME_STEPS ; i<TIME_STEPS ; i++ ) {
+    for (let hour = TIME_START; hour < TIME_END; hour += 1) {
+      for (let i = 0, minutes = 60 / TIME_STEPS; i < TIME_STEPS; i += 1) {
         scale.push({
           hour,
           minutes: minutes * i
-        })
+        });
       }
     }
 
     return scale;
   }
 
+  static getSchedule(avail) {
+    const schedule = new Array((TIME_END - TIME_START) * TIME_STEPS).fill(FREE);
+
+    // Parse time spans from avail data
+    const timespans = avail.map((timespan) => {
+      const ts = timespan.match(timespanRe);
+
+      return [((parseInt(ts[1], 10) - TIME_START) * TIME_STEPS) +
+        ((parseInt(ts[2], 10) / 60) * TIME_STEPS),
+
+        ((parseInt(ts[3], 10) - TIME_START) * TIME_STEPS) +
+        ((parseInt(ts[4], 10) / 60) * TIME_STEPS)];
+    });
+
+    // Read them into a booking array
+    timespans.forEach((timespan) => {
+      for (let i = timespan[0]; i < timespan[1]; i += 1) schedule[i] = BOOKED;
+    });
+
+    return schedule;
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      schedule: this.constructor.getSchedule(props.avail),
+      scale: this.constructor.getScale()
+    };
+  }
+
   render() {
-    const {schedule, scale} = this.state;
+    const { scale } = this.state;
 
     return (
       <div className={cx(s.wrapper)} >
         <table className={cx(s.table)}>
           <tbody>
             <tr>
-              {this.state.schedule.map((booked, i) => 
+              {this.state.schedule.map((booked, index) =>
                 <td
-                  key={`booked${i}`}
-                  className={cx(s.period, booked? s.booked : s.free, i%TIME_STEPS? s.fraction : s.full)}
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={`booked${index}`}
+                  className={cx(
+                    s.period, booked ? s.booked : s.free,
+                    index % TIME_STEPS ? s.fraction : s.full
+                  )}
                 >
-                  {i%TIME_STEPS? scale[i].minutes : scale[i].hour}
+                  {index % TIME_STEPS ? scale[index].minutes : scale[index].hour}
                 </td>
               )}
             </tr>
           </tbody>
         </table>
-
       </div>
-    )
+    );
   }
 }
 
